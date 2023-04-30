@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 class="text-center mb-4">Créez votre carte McBooster personnalisée</h1>
+    {% if current_user.is_authenticated %}
+        <form action="{{ url_for('generate_card') }}" method="post" enctype="multipart/form-data" class="row g-3">
+            <button type="submit" class="btn btn-primary">Générer l'image personnalisée</button>
+        </form>
+    {% else %}
+        <div class="alert alert-info" role="alert">
+            Vous devez être connecté pour générer une carte McBooster personnalisée. <a href="{{ url_for('login') }}" class="alert-link">Connectez-vous</a> ou <a href="{{ url_for('register') }}" class="alert-link">créez un compte</a>.
+        </div>
+    {% endif %}
+{% endblock %}

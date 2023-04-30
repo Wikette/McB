@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 class="text-center mb-4">Profil</h1>
+    <form action="{{ url_for('update_profile') }}" method="post" enctype="multipart/form-data" class="row g-3">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="alert alert-{{ 'success' if 'Profil mis à jour' in messages[0] else 'danger' }}">
+                    {{ messages[0] }}
+                </div>
+            {% endif %}
+        {% endwith %}
+        <div class="col-12 col-md-6">
+            <label for="nom" class="form-label">Nom</label>
+            <input type="text" class="form-control" id="nom" name="nom" value="{{ current_user.nom }}" required>
+        </div>
+        <div class="col-12 col-md-6">
+            <label for="prenom" class="form-label">Prénom</label>
+            <input type="text" class="form-control" id="prenom" name="prenom" value="{{ current_user.prenom }}" required>
+        </div>
+        <div class="col-12 col-md-6">
+            <label for="photo" class="form-label">Photo d'identité</label>
+            <input type="file" class="form-control" id="photo" name="photo">
+            {% if current_user.photo %}
+                <img src="{{ url_for('static', filename='uploads/' + current_user.photo) }}" alt="Photo d'identité" class="img-thumbnail mt-2" style="width: 100px; height: 100px;">
+            {% endif %}
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Mettre à jour le profil</button>
+            <small class="form-text text-muted">* Vous ne pouvez modifier votre nom et prénom qu'une fois par mois.</small>
+        </div>
+    </form>
+{% endblock %}

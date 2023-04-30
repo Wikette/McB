@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 class="text-center mb-4">Inscription</h1>
+    <form action="{{ url_for('register') }}" method="post" class="row g-3">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="alert alert-danger">
+                    {{ messages[0] }}
+                </div>
+            {% endif %}
+        {% endwith %}
+        <div class="col-12">
+            <label for="email" class="form-label">Adresse e-mail</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="col-12">
+            <label for="password" class="form-label">Mot de passe</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+        </div>
+        <div class="col-12">
+            <label for="confirm_password" class="form-label">Confirmez le mot de passe</label>
+            <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">S'inscrire</button>
+        </div>
+    </form>
+{% endblock %}
