@@ -102,8 +102,7 @@ def index():
 
         # Charger et traiter l'image utilisateur
         img_data = base64.b64decode(user.photo)
-                img = Image.open(io.BytesIO(img_data)).convert('RGBA')
-
+        img = Image.open(io.BytesIO(img_data)).convert('RGBA')
         # Charger l'image template
         base_image = Image.open("static/template.png")
         base_image.paste(img, (95, 760), img)
